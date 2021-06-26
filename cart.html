@@ -1,0 +1,52 @@
+{% extends 'store/index.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--Cart Items-->
+
+
+    <h1 class="cart__heading"> CART </h1>
+    <h2 class="cart__heading2"><a href="{%url 'shop' %}">BACK TO SHOP</a></h2>
+
+<div class="cart-container">
+    <div class= "total-price">
+        <table>
+            <tr>
+                <td>Total Items:</td>
+                <td>{{order.get_cart_items}}</td>
+                <td>Total Price:</td>
+                <td>P{{order.get_cart_total}}</td>
+                <td> <a href="{%url 'checkout' %}">Checkout</a></td>
+            </tr>
+        </table>
+    </div>
+    <table>
+        <tr>
+            <th> PRODUCT </th>
+            <th> QUANTITY </th>
+            <th> SUBTOTAL </th>
+        </tr>
+
+        {% for item in items %}
+        <tr>
+            <td> 
+                <div class="cart-info">
+                    <img id= "cart-product" src="{{item.product.imageURL}}">
+                    <div>
+                        <p>{{item.product.name}}</p>
+                        <small>P{{item.product.price|floatformat:2}}<small>
+                        <br>
+                        <a href="">Remove</a>
+                    </div> 
+                </div>
+            </td>
+            <td> <input type= "number" value={{item.quantity}}> </td>
+            <td> P{{item.get_total}}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</div>
+
+{% endblock content %}
